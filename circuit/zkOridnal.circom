@@ -1,15 +1,26 @@
-pragma circom 2.0.0;
+pragma circom 2.0.0
 
-// prove owner of utxo is the owner of brc20
+include "@circomlib/circuits/poseidon.circom";
+
 template zkOrdinals() {
+    signal input data;
+    signal input utxo;
+    signal input root;
+    signal output new_root;
 
-    signal input brc20;
+    // check utxo...
+    
+    // check on-chain data(inscription)
+        
+    // BRC20/BRC721 Protocol...
+    
+    // compute new root
+    component poseidon = Poseidon(3);
+    poseidon.inputs[0] <== root;
+    poseidon.inputs[1] <== data;
+    poseidon.inputs[2] <== utxo;
+    new_root <== poseidon.out;
 
-    // prove is the owner of utxo
-    signal input sk;    // private input
-
-    // prove utxo inscribe brc20
-    signal output utxo;
 }
 
-component main {public [utxo, brc20]} = zkOrdinals();
+component main {public [root, new_root]} = zkOrdinals();
